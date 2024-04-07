@@ -17,7 +17,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      uuid: json['uuid'],
+      uuid: json['_uuid'],
       firstName: json['first_name'],
       lastName: json['last_name'],
       birthDate: json['birth_date'],
@@ -28,7 +28,17 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'uuid': uuid,
+      'first_name': firstName,
+      'last_name': lastName,
+      'birth_date': birthDate,
+      'age': age,
+      'profile_image': profileImage,
+    };
+  }
+
+  Map<String, dynamic> toJsonForUpdate(){
+    return {
+      "_uuid" : uuid,
       'first_name': firstName,
       'last_name': lastName,
       'birth_date': birthDate,

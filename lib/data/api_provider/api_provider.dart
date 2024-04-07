@@ -42,4 +42,40 @@ class ApiProvider {
       debugPrint('insertUser error: $error');
     }
   }
+
+  static Future<void> updateUser(UserModel userModel) async {
+    try {
+      Response response = await dio.put(
+        "${AppConstants.baseUrl}/api/v1/users/${userModel.uuid}",
+        data: userModel.toJsonForUpdate(),
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${AppConstants.apiKey}",
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        print(response.data);
+      }
+    } catch (error) {
+      debugPrint('updateUser error: $error');
+    }
+  }
+
+  static Future<void> deleteUser(String uuid) async {
+    try {
+      Response response =
+          await dio.delete("${AppConstants.baseUrl}/api/v1/users/$uuid",
+              options: Options(headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer ${AppConstants.apiKey}",
+              }));
+      if (response.statusCode == 200) {
+        print(response.data);
+      }
+    } catch (error) {
+      debugPrint('deleteUser error: $error');
+    }
+  }
 }

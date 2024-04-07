@@ -40,18 +40,9 @@ flutter:
 #    - assets/images/
 #    - assets/fonts/
 
-    #  fonts:
-    #    - family: Roboto
-    #      fonts:
-    #        - asset: assets/fonts/roboto/Roboto-Medium.ttf
-    #        - asset: assets/fonts/roboto/Roboto-Light.ttf
-    #        - asset: assets/fonts/roboto/Roboto-Regular.ttf
-
-    #         style: italic
-    # - family: Roboto
-    #   fonts:
-    #     - asset: assets/fonts/roboto/roboto_regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Medium.ttf
+        - asset: assets/fonts/Nunito-Bold.ttf
+        - asset: assets/fonts/Nunito-Regular.ttf

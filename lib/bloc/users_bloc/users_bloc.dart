@@ -8,6 +8,8 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   UsersBloc() : super(UsersInitialState()) {
     on<UsersGetEvent>(_getUsers);
     on<UsersAddEvent>(_insertUser);
+    on<UsersUpdateEvent>(_updateUser);
+    on<UsersDeleteEvent>(_deleteUser);
   }
 
   Future<void> _getUsers(UsersGetEvent event, Emitter<UsersState> emit) async {
@@ -24,6 +26,16 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       UsersAddEvent event, Emitter<UsersState> emit) async {
     emit(UsersLoadingState());
     await UserRepository.insertUser(event.user);
+    add(UsersGetEvent());
+  }
+  Future<void> _updateUser(UsersUpdateEvent event, Emitter<UsersState> emit) async {
+    emit(UsersLoadingState());
+    await UserRepository.updateUser(event.user);
+    add(UsersGetEvent());
+  }
+  Future<void> _deleteUser(UsersDeleteEvent event, Emitter<UsersState> emit) async {
+    emit(UsersLoadingState());
+    await UserRepository.deleteUser(event.id);
     add(UsersGetEvent());
   }
 }

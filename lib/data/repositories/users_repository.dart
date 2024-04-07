@@ -6,4 +6,10 @@ class UserRepository {
 
   static Future<void> insertUser(UserModel userModel) async =>
       ApiProvider.insertUser(userModel);
+
+  static Future<void> updateUser(UserModel userModel) async =>
+      ApiProvider.updateUser(userModel);
+
+  static Future<void> deleteUser(String uuid) async =>
+      ApiProvider.deleteUser(uuid);
 }
