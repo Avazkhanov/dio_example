@@ -39,7 +39,7 @@ class _UpdateUsersScreenState extends State<UpdateUsersScreen> {
             icon: const Icon(Icons.arrow_back_ios_new),
             onPressed: () => Navigator.pop(context),
           ),
-          title: const Text('Add Users'),
+          title: const Text('Update User'),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 18.w),
