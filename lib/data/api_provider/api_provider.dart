@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:dio_example/data/api_client/api_client.dart';
 import 'package:dio_example/data/models/users_model.dart';
 import 'package:dio_example/utils/app_constants/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 
-class ApiProvider {
-  static Dio dio = Dio();
-
-  static Future<List<UserModel>> getUsers() async {
+class ApiProvider extends ApiClient {
+  Future<List<UserModel>> getUsers() async {
     List<UserModel> users = [];
     try {
       Response response = await dio.get("${AppConstants.baseUrl}/api/v1/users",
@@ -27,7 +26,7 @@ class ApiProvider {
     return users;
   }
 
-  static Future<void> insertUser(UserModel userModel) async {
+  Future<void> insertUser(UserModel userModel) async {
     try {
       Response response = await dio.post("${AppConstants.baseUrl}/api/v1/users",
           data: jsonEncode([userModel.toJson()]),
@@ -43,7 +42,7 @@ class ApiProvider {
     }
   }
 
-  static Future<void> updateUser(UserModel userModel) async {
+  Future<void> updateUser(UserModel userModel) async {
     try {
       Response response = await dio.put(
         "${AppConstants.baseUrl}/api/v1/users/${userModel.uuid}",
@@ -63,7 +62,7 @@ class ApiProvider {
     }
   }
 
-  static Future<void> deleteUser(String uuid) async {
+  Future<void> deleteUser(String uuid) async {
     try {
       Response response =
           await dio.delete("${AppConstants.baseUrl}/api/v1/users/$uuid",

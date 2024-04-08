@@ -12,9 +12,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     on<UsersDeleteEvent>(_deleteUser);
   }
 
+  UserRepository userRepository = UserRepository();
+
   Future<void> _getUsers(UsersGetEvent event, Emitter<UsersState> emit) async {
     emit(UsersLoadingState());
-    List<UserModel> users = await UserRepository.getAllUser();
+    List<UserModel> users = await userRepository.getAllUser();
     if (users.isEmpty) {
       emit(UsersErrorState(message: "Nomalum xatolik"));
     } else {
@@ -25,17 +27,17 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   Future<void> _insertUser(
       UsersAddEvent event, Emitter<UsersState> emit) async {
     emit(UsersLoadingState());
-    await UserRepository.insertUser(event.user);
+    await userRepository.insertUser(event.user);
     add(UsersGetEvent());
   }
   Future<void> _updateUser(UsersUpdateEvent event, Emitter<UsersState> emit) async {
     emit(UsersLoadingState());
-    await UserRepository.updateUser(event.user);
+    await userRepository.updateUser(event.user);
     add(UsersGetEvent());
   }
   Future<void> _deleteUser(UsersDeleteEvent event, Emitter<UsersState> emit) async {
     emit(UsersLoadingState());
-    await UserRepository.deleteUser(event.id);
+    await userRepository.deleteUser(event.id);
     add(UsersGetEvent());
   }
 }
